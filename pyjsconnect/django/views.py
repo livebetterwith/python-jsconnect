@@ -5,17 +5,7 @@ from pyjsconnect import make_jsconnect_response
 from hashlib import sha1
 
 
-try:
-    JSCONNECT_CLIENT_ID = getattr(settings, 'JSCONNECT_CLIENT_ID')
-    JSCONNECT_SECRET = getattr(settings, 'JSCONNECT_SECRET')
-except AttributeError:
-    raise ImproperlyConfigured(
-        "JSCONNECT_CLIENT_ID and JSCONNECT_SECRET must be specified in "
-        "settings"
-    )
-
-
-def jsconnect(request, hash_func=None):
+def jsconnect(request, hash_func=None, send_name=True):
 
     if hash_func is None:
         hash_func = sha1
@@ -24,7 +14,7 @@ def jsconnect(request, hash_func=None):
 
     if request.user.is_authenticated():
         user_data['uniqueid'] = request.user.id
-        user_data['name'] = request.user.first_name
+        user_data['name'] = request.user.first_name if send_name else ""
         user_data['email'] = request.user.email
         user_data['photourl'] = ""
 
