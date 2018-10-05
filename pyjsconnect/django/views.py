@@ -19,8 +19,8 @@ def jsconnect(request, hash_func=None, send_name=True):
         user_data['photourl'] = ""
 
     json_response, content_type = make_jsconnect_response(
-        client_id = JSCONNECT_CLIENT_ID,
-        secret = JSCONNECT_SECRET,
+        client_id = settings.JSCONNECT["client_id"],
+        secret = settings.JSCONNECT["secret"],
         request_data = request.GET.dict(),
         user_data = user_data,
         hash_func = hash_func,
