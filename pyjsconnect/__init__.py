@@ -1,6 +1,9 @@
 import json
 from hashlib import md5
-from urllib import urlencode
+try:
+    from urllib import urlencode
+except ImportError:
+    from urllib.parse import urlencode
 from collections import OrderedDict
 
 
