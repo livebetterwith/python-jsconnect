@@ -30,7 +30,7 @@ def make_jsconnect_response(client_id,
 
         if request_data['client_id'] != client_id:
             raise JSConnectError(
-                "Unknown client %s." % request_data['client_id']
+                "Unknown client {}.".format(request_data['client_id'])
             )
 
         if not request_data.get('timestamp'):
@@ -53,7 +53,8 @@ def make_jsconnect_response(client_id,
         # Calculate signature
         response = OrderedDict(sorted(user_data.items()))
         query_str = urlencode(response)
-        signature = hash_func("%s%s" % (query_str, secret)).hexdigest()
+        signature = hash_func(
+            "{}{}".format(query_str, secret).encode('utf-8')).hexdigest()
 
         response['client_id'] = client_id
         response['signature'] = signature
@@ -61,7 +62,8 @@ def make_jsconnect_response(client_id,
     json_response = json.dumps(response)
 
     if request_data.get('callback'):
-        json_response = "%s(%s)" % (request_data['callback'], json_response)
+        json_response = "{}({})".format(request_data['callback'],
+                                        json_response)
         mimetype = "application/javascript"
     else:
         mimetype = "application/json"
