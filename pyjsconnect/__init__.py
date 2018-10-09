@@ -36,7 +36,7 @@ def make_jsconnect_response(client_id,
         if not request_data.get('timestamp'):
             raise JSConnectError("The timestamp parameter is missing.")
 
-    except JSConnectError, e:
+    except JSConnectError as e:
 
         response = {
             'error': "invalid_request",
