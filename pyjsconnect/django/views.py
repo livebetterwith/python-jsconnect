@@ -28,7 +28,7 @@ def jsconnect(request, hash_func=None):
         user_data['email'] = request.user.email
         user_data['photourl'] = ""
 
-    json_response, mimetype = make_jsconnect_response(
+    json_response, content_type = make_jsconnect_response(
         client_id = JSCONNECT_CLIENT_ID,
         secret = JSCONNECT_SECRET,
         request_data = request.GET.dict(),
@@ -36,4 +36,4 @@ def jsconnect(request, hash_func=None):
         hash_func = hash_func,
     )
 
-    return HttpResponse(json_response, mimetype=mimetype)
+    return HttpResponse(json_response, content_type=content_type)
