@@ -5,7 +5,7 @@ from pyjsconnect import make_jsconnect_response
 from hashlib import sha1
 
 
-def jsconnect(request, hash_func=None, send_name=True):
+def jsconnect(request, hash_func=None):
 
     if hash_func is None:
         hash_func = sha1
@@ -14,7 +14,7 @@ def jsconnect(request, hash_func=None, send_name=True):
 
     if request.user.is_authenticated():
         user_data['uniqueid'] = request.user.id
-        user_data['name'] = request.user.first_name if send_name else ""
+        user_data['name'] = request.user.username
         user_data['email'] = request.user.email
         user_data['photourl'] = ""
 
