@@ -14,7 +14,7 @@ def jsconnect(request, hash_func=None):
 
     if request.user.is_authenticated():
         user_data['uniqueid'] = request.user.id
-        user_data['name'] = request.user.username
+        user_data['name'] = request.user.profile.username
         user_data['email'] = request.user.email
         user_data["roles"] = ",".join(request.user.profile.community_roles)
         user_data['photourl'] = ""
