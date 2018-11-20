@@ -16,6 +16,7 @@ def jsconnect(request, hash_func=None):
         user_data['uniqueid'] = request.user.id
         user_data['name'] = request.user.username
         user_data['email'] = request.user.email
+        user_data["roles"] = ",".join(request.user.profile.community_roles)
         user_data['photourl'] = ""
 
     json_response, content_type = make_jsconnect_response(
