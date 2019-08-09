@@ -12,7 +12,7 @@ def jsconnect(request, hash_func=None):
 
     user_data = {}
 
-    if request.user.is_authenticated() and hasattr(request.user, "profile"):
+    if request.user.is_authenticated and hasattr(request.user, "profile"):
         user_data['uniqueid'] = request.user.id
         user_data['name'] = request.user.profile.username
         user_data['email'] = request.user.email
